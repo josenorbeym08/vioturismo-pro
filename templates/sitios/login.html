@@ -1,6 +1,7 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
-{% block tittle %} login {% endblock %}
-{% block body %}
+{% block title %} login {% endblock %}
+{% block content %}
 <form action="." method="POST" >
     {% csrf_token %}
     {{mensaje}}

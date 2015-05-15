@@ -1,7 +1,10 @@
 from django.contrib import admin
+from vioturismo.apps.sitios.models import Setting 
+ 
 
-# Register your models here.
-from vioturismo.apps.sitios.models import sitio
+from vioturismo.apps.sitios.models import userProfile
+
+admin.site.register(userProfile)
+admin.site.register(Setting)
 
 
-admin.site.register(sitio)

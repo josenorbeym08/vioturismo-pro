@@ -1,4 +1,3 @@
-
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -24,6 +23,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_extensions',
     'vioturismo.apps.sitios',
+    'vioturismo.apps.sturist'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -38,6 +38,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'vioturismo.urls'
 
+AUTH_PROFILE_MODULE = 'vioturismo.sitios.userProfile'
+
 WSGI_APPLICATION = 'vioturismo.wsgi.application'
 
 
@@ -46,12 +48,16 @@ WSGI_APPLICATION = 'vioturismo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'vio.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'vio',
+        'USER': 'root',                      # Nol at used with sqlite3.
+        'PASSWORD': 'root',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',  
     }
 }
 
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'es-co'
 
 TIME_ZONE = 'UTC'
 
@@ -60,6 +66,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT =os.path.join(BASE_DIR, 'vioturismo/media')
 
 
 # Static files (CSS, JavaScript, Images)
@@ -73,25 +84,8 @@ STATICFILES_DIRS =(
 )
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR+'/templates'),
+    os.path.join(BASE_DIR+'/templates/'),
 
 )
 
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
-ALLOWED_HOSTS = ['*']
-
-# Static asset configuration
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)

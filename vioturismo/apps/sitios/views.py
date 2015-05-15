@@ -1,17 +1,19 @@
 from django.shortcuts import render, render_to_response, RequestContext
-
+from django.template import RequestContext
 from vioturismo.apps.sitios.forms import loginForm, RegisterForm
-
+from vioturismo.apps.sturist.models import producto
 from django.contrib.auth.models import User 
 from django.contrib.auth import login,logout,authenticate
 from django.http import HttpResponsePermanentRedirect
-
-
-# Create your views here.
+from django.http import HttpResponseRedirect 
 
 def index_view(request):
     return render_to_response('sitios/index.html', context_instance=RequestContext(request))
 
+def productos_view(request):
+        prod = producto.objects.filter(status=True)
+        ctx = {'productos':prod}
+        return render_to_response('sitios/sitios.html',ctx,context_instance=RequestContext(request))
 
 
 def login_view(request):
@@ -20,16 +22,16 @@ def login_view(request):
             return HttpResponsePermanentRedirect('/')
     else:
             if request.method == "POST":
-                form = loginForm(request.POST)
-                if form.is_valid():
-                    username = form.cleaned_data['username']
-                    password = form.cleaned_data['password']
-                    usuario = authenticate(username=username,password=password)
-                    if usuario is not None and usuario.is_active:
-                        login(request,usuario)
-                        return HttpResponsePermanentRedirect('/')
-                    else:
-                            mensaje = "usuario y/o password incorrectos"
+                    form = loginForm(request.POST)
+                    if form.is_valid():
+                            username = form.cleaned_data['username']
+                            password = form.cleaned_data['password']
+                            usuario = authenticate(username=username,password=password)
+                            if usuario is not None and usuario.is_active:
+                                    login(request,usuario)
+                                    return HttpResponsePermanentRedirect('/')
+                            else:
+                                    mensaje = "usuario y/o password incorrectos"
             form = loginForm()
             ctx = {'form': form, 'mensaje': mensaje}
             return render_to_response('sitios/login.html', ctx,context_instance=RequestContext(request))

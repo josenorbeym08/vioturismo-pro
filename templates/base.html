@@ -1,13 +1,14 @@
 {% load staticfiles %}
-<!DOCTYPE html>
+
+<!DOCTYPE HTML>
 <html lang="en">
   <head>
-		<title>Vioturismo {% block title %}{% endblock %}</title>
+		<title> {% block title %}Vioturismo{% endblock %}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+		<link rel="stylesheet" type="text/css" href= "{% static 'css/bootstrap.css' %}" >
 		<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css'%}">
-		<link rel='stylesheet' id='camera-css'  href='{% static 'css/camera.css' %}' type='text/css' media='all'>
+		<link rel='stylesheet' id='camera-css'  href="{% static 'css/camera.css' %}" type='text/css' media='all'>
 
 		<link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}">
 		<link rel="stylesheet" href="{% static 'css/prettyPhoto.css' %}" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
@@ -67,13 +68,14 @@
 							<li><a href="#project">Viota</a></li>
 							<li><a href="#news">Guia Turistica</a></li>
 							<li class="last"><a href="#contact">Contactanos</a></li>
+							<li><a href="#">Sitios</a></li>
+							<li><a href="#">Servicios</a></li>
 							<!--li><a href="#features">Features</a></li-->
                             {% if user.is_authenticated %}
-                            <li><a href="/logout/"> cerrar sesion</a></li>
+                            <li><a href="{% url 'vista_logout' %}"> cerrar sesion</a></li>
                             {% else %}
-                            <li><a href="/login/">login</a></li>
+                            <li><a href="{% url 'vista_login' %}">login</a></li>
                             {% endif %}
-
 						</ul>
 					</div>
 				</div>
@@ -81,7 +83,7 @@
 		</div>
 	</div>
 		<div class="container">
-            {% block body %}
+            {% block content %}
             {% endblock %}
 			<div class="row wrap">
 				<div class="col-md-12 gallery">

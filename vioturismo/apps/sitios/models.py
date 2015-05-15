@@ -1,13 +1,52 @@
 #coding: utf-8
 from django.db import models
+from django.contrib.auth.models import User
 
 
-class sitio(models.Model):
-	nombre			= models.CharField(max_length=200)
-	descripcion		= models.CharField(max_length=200)
-	contacto		= models.CharField(max_length=200)
-	status			= models.BooleanField(default=True)
+def image_path(filename):
+	ruta = "settings/%s/%s" % (self.settings_name, str(filename))
+	return ruta
+
+
+def url(filename):
+	ruta = "MultimediaData/Users/%s/%s"%(self.user.username,filename)
+	return ruta
+
+
+class userProfile(models.Model):
+
+	user     = models.OneToOneField(User)
+	photo    = models.ImageField(upload_to=url)
+	telefono = models.CharField(max_length=30)
 
 	def __unicode__(self):
-		nombrecompleto = "%s %s"%(self.nombre,self.descripcion)
-		return nombrecompleto
+		return self.user.username
+
+
+
+
+class Setting(models.Model):
+
+	settings_name = models.CharField(max_length=200)
+	my_name = models.CharField(max_length=200)
+	my_job = models.CharField(max_length=200)
+	my_description = models.TextField(max_length=500)
+	my_photo = models.ImageField(upload_to=image_path)
+	background = models.ImageField(upload_to= image_path)
+	status = models.BooleanField(default=False)
+
+	def __unicode__(self):
+		return self.settings_name
+
+	class Meta:
+		verbose_name = "Configuracion de la web"
+		verbose_name_plural = "configuraciones de la web"
+
+
+
+
+
+
+
+
+
