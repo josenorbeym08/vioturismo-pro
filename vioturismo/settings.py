@@ -19,12 +19,16 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
     'vioturismo.apps.sitios',
-    'vioturismo.apps.sturist'
+    'vioturismo.apps.sturist',
+
 )
+
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -38,7 +42,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'vioturismo.urls'
 
-AUTH_PROFILE_MODULE = 'vioturismo.sitios.userProfile'
+AUTH_PROFILE_MODULE = 'sitios.userProfile'
 
 WSGI_APPLICATION = 'vioturismo.wsgi.application'
 
@@ -57,7 +61,7 @@ DATABASES = {
     }
 }
 
-LANGUAGE_CODE = 'es-co'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -69,8 +73,10 @@ USE_TZ = True
 
 
 
+MEDIA_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__),'media/'))
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT =os.path.join(BASE_DIR, 'vioturismo/media')
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -87,5 +93,12 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR+'/templates/'),
 
 )
+
+# AQUI VA LA CONFIGURACION DEL SERVIDOR DE CORREO
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'sanchezmoralesjn@gmail.com'
+EMAIL_HOST_PASSWORD = '87061956121'
+EMAIL_USE_TLS = True
 
 

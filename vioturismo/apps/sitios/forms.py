@@ -1,8 +1,10 @@
-__author__ = 'ASUS I5'
 from django import forms
 from django.contrib.auth.models import User
 
-
+class ContactForm(forms.Form):
+	Email  = forms.EmailField(widget=forms.TextInput())
+	Titulo = forms.CharField(widget=forms.TextInput())
+	Texto  = forms.CharField(widget=forms.Textarea())
 
 class loginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
@@ -11,8 +13,8 @@ class loginForm(forms.Form):
 
 class RegisterForm(forms.Form):
 	username = forms.CharField(label="Nombre de usuario", widget=forms.TextInput())
-	email    = forms.EmailField(label="Corro electronico", widget=forms.TextInput())
-	password_one = forms.CharField(label='Password',widget=forms.PasswordInput(render_value=False))
+	email    = forms.EmailField(label="Correo electronico", widget=forms.TextInput())
+	password_one = forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 	password_two = forms.CharField(label="Confirmar password",widget=forms.PasswordInput(render_value= False))
 		
 	def clean_username(self):

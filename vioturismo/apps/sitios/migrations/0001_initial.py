@@ -2,21 +2,24 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
+import vioturismo.apps.sitios.models
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='sitio',
+            name='userProfile',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('nombre', models.CharField(max_length=200)),
-                ('descripcion', models.CharField(max_length=200)),
-                ('contacto', models.CharField(max_length=200)),
+                ('photo', models.ImageField(upload_to=vioturismo.apps.sitios.models.url)),
+                ('telefono', models.CharField(max_length=30)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
