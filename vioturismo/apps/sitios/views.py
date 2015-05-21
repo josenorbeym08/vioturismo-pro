@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from vioturismo.apps.sitios.forms import loginForm, RegisterForm, ContactForm
-from vioturismo.apps.sturist.models import producto
+from vioturismo.apps.sturist.models import producto, servicio
 from django.contrib.auth.models import User 
 from django.contrib.auth import login,logout,authenticate
 from django.http import HttpResponseRedirect 
@@ -25,10 +25,38 @@ def productos_view(request,pagina):
     ctx = {'productos':productos}
     return render_to_response('sitios/productos.html',ctx,context_instance=RequestContext(request))
 
+
 def singleProduct_view(request,id_prod):
     prod = producto.objects.get(id=id_prod)
     ctx = {'producto':prod}
     return render_to_response('sitios/SingleProducto.html',ctx,context_instance=RequestContext(request))
+
+
+
+
+
+def servicios_view(request,pagina):
+    lista_serv = servicio.objects.filter(status=True)
+    paginator = Paginator(lista_serv,5)
+    try:
+        page = int(pagina)
+    except:
+        page = 1
+    try:
+        servicios = paginator.page(page)
+    except (EmptyPage,InvalidPage):
+        servicios = paginator.page(paginator.num_pages)
+    ctx = {'servicios':servicios}
+    return render_to_response('sitios/servicios.html',ctx,context_instance=RequestContext(request))
+
+
+
+def singleServic_view(request,id_serv):
+    serv = servicio.objects.get(id=id_serv)
+    ctx = {'servicio':serv}
+    return render_to_response('sitios/SingleSevicio.html',ctx,context_instance=RequestContext(request))
+
+
 
 
 def contacto_view(request):

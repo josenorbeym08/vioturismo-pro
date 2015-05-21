@@ -25,6 +25,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'vioturismo.apps.sitios',
     'vioturismo.apps.sturist',
+#    'vioturismo.apps.webServices.wsProductos',
 
 )
 

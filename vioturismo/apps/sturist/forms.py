@@ -10,3 +10,19 @@ class addProductForm(forms.Form):
 
 	def clean(self):
 		return self.cleaned_data
+
+
+
+
+
+class addServicForm(forms.Form):
+	nombre          = forms.CharField(widget=forms.TextInput())
+	descripcion     = forms.CharField(widget=forms.TextInput())
+	imagen          = forms.ImageField(required=False)
+	contacto		= forms.CharField(required=True)
+	precio 			= forms.CharField(required=True)
+		
+
+	def clean(self):
+		return self.cleaned_data
+

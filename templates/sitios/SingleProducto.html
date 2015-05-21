@@ -3,8 +3,8 @@
 {% block content %}
 <h1> {{ producto.nombre }}</h1><br>
 <img src="/media/{{ producto.imagen }}" width="100%" heigth="100%"/>
-<p> {{ producto.descripcion }}</p>
-<p> {{ producto.contacto }}</p>
+<h2><p> {{ producto.descripcion }}</p></h2>
+<h2><p> {{ producto.contacto }}</p></h2>
 <br><br>
 <a href="javascript:window.history.go(-1);"> Regresar a la lista </a>
 {% endblock %}
