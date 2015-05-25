@@ -4,11 +4,11 @@
 	<form action="." method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ form.as_p }}
-		<input type="submit" value="Grabar">
-		<input type="reset" value="Limpiar">
+		<button class="btn btn-primary" type="submit"> Grabar </button>
+		<button class="btn btn-primary" type="reset"> Limpiar </button>
 	</form>
 <br>
 	{{ informacion }}
 <br>
-<a href="/productos/page/1/"> Regresar a la lista de Sitios</a>
+<a href="/sitiosts/page/1/"> Regresar a la lista de Sitios</a>
 {% endblock %}

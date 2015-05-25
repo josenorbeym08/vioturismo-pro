@@ -21,4 +21,4 @@ class servicioAdmin(admin.ModelAdmin):
 
 
 admin.site.register(producto,productoAdmin)
-admin.site.register(servicio)
+admin.site.register(servicio,servicioAdmin)

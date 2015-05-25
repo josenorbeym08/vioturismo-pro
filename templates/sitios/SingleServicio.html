@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %} Servicio {{servicio.nombre}} {% endblock %}
+{% block content %}
+<h1> {{ servicio.nombre }}</h1><br>
+<img src="/media/{{ servicio.imagen }}" width="100%" heigth="100%"/>
+<h2><p> {{ servicio.descripcion }}</p></h2>
+<h2><p> {{ servicio.contacto }}</p></h2>
+<br><br>
+<a href="javascript:window.history.go(-1);" class="btn btn-primary" > Regresar a la lista </a>
+{% endblock %}

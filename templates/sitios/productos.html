@@ -9,25 +9,25 @@
 <br>
 {% if productos %}
 	{% for p in productos %}
-		<p><a href="/producto/{{p.id}}/">{{p.nombre}}</a></p>
+		<p><a href="/sitiost/{{p.id}}/">{{p.nombre}}</a></p>
 	{% endfor %}
 {% else %}
 	<h2>NO existen sitios activos a la vista :( </h2>
 {% endif %}
 <br><br><br>
 {% if productos %}
-		<a href="/productos/page/1"> << </a>
+		<a href="/sitiosts/page/1"> << </a>
 	{% if productos.has_previous %}
-		<a href="/productos/page/{{productos.previous_page_number }}/"> Prev </a>
+		<a href="/sitiosts/page/{{productos.previous_page_number }}/"> Prev </a>
 	{% else %}
 		<a href="#"> Prev</a>
 	{% endif %}
 	{% if productos.has_next %}
-		<a href="/productos/page/{{productos.next_page_number }}/"> Next </a>
+		<a href="/sitiosts/page/{{productos.next_page_number }}/"> Next </a>
 	{% else %}
 		<a href="#"> Next </a>
 	{% endif %}
-		<a href="/productos/page/{{productos.paginator.num_pages }}"> >> </a>
+		<a href="/sitiosts/page/{{productos.paginator.num_pages }}"> >> </a>
 <br><br><br>
 	<h4> Pagina {{ productos.number }} de {{ productos.paginator.num_pages }}</h4>
 {% endif %}
