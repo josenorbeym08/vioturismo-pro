@@ -25,6 +25,7 @@ INSTALLED_APPS = (
     'vioturismo.apps.sitios',
     'vioturismo.apps.sturist',
     'vioturismo.apps.webServices.wsSitiostcs',
+    'django.contrib.admindocs',
 #    'vioturismo.apps.webServices.wsProductos',
 
 )
@@ -51,6 +52,11 @@ WSGI_APPLICATION = 'vioturismo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+#MANAGERS = ADMINS
+#MOTOR_DB == 'sqlite'
+
+
+#if MOTOR_DB == 'mysql':
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -61,6 +67,21 @@ DATABASES = {
         'PORT': '',  
     }
 }
+#if MOTOR_DB == 'sqlite':
+#    DATABASES = {
+#       'default': {
+#           'ENGINE': 'django.db.backends.sqlite3',
+#           'NAME': os.path.join(os.path.dirname(__file__),'vio.db'),
+#           'USER': 'root',                      # Nol at used with sqlite3.
+#           'PASSWORD': 'root',                  # Not used with sqlite3.
+#           'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+#           'PORT': '',  
+#       }
+#   }
+
+
+
+
 
 LANGUAGE_CODE = 'es'
 
@@ -74,7 +95,8 @@ USE_TZ = True
 
 
 
-MEDIA_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__),'media/'))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__),'media/'))
 
 MEDIA_URL = '/media/'
 
@@ -82,7 +104,7 @@ MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS =(
@@ -95,11 +117,46 @@ TEMPLATE_DIRS = (
 
 )
 
+
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+
+
+LOGIN_REDIRECT_URL = '/'
+
+
 # AQUI VA LA CONFIGURACION DEL SERVIDOR DE CORREO
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'sanchezmoralesjn@gmail.com'
-EMAIL_HOST_PASSWORD = '87061956121'
+EMAIL_HOST_USER = 'vioturismopro@gmail.com'
+EMAIL_HOST_PASSWORD = 'Jn123456'
 EMAIL_USE_TLS = True
 
 
+URL_LOGIN = '/login/'

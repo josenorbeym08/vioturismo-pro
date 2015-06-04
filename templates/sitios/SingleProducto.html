@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 {% block title %} Sitio {{producto.nombre}} {% endblock %}
 {% block content %}
+<h1> Sitio Turistico </h1>
 <h1> {{ producto.nombre }}</h1><br>
-<img src="/media/{{ producto.imagen }}" width="100%" heigth="100%"/>
-<h2><p> {{ producto.descripcion }}</p></h2>
-<h2><p> {{ producto.contacto }}</p></h2>
+<img src="/media/{{ producto.imagen }}" width="50%" heigth="50%"/>
+<h3>Descripcion<p> {{ producto.descripcion }}</p></h3>
+<h3><p> Contacto: {{ producto.contacto }}</p></h3>
+<h3><p> Telefono: {{ producto.telefono }}</p></h3>
+<h3><p> Contacto2: {{ producto.contacto2 }}</p></h3>
+<h3><p> Telefono2: {{ producto.telefono2 }}</p></h3>
+
+<h3>Ruta a la que pertenece el sitio:</h3>
+{% for cat in rutas %}
+<span class=" label label-info"><h4>{{cat.nombre}}</h4> </span>
+{% endfor %}
 <br><br>
-<a href="javascript:window.history.go(-1);" class="btn btn-primary" > Regresar a la lista </a>
+<a class="btn btn-primary" href="javascript:window.history.go(-1);"> Regresar a la Lista </a>
 {% endblock %}

@@ -3,14 +3,29 @@ from django.template import RequestContext
 from vioturismo.apps.sitios.forms import loginForm, RegisterForm, ContactForm
 from vioturismo.apps.sturist.models import producto
 from vioturismo.apps.sturist.models import servicio
+from vioturismo.apps.sturist.models import experiencia
 from django.contrib.auth.models import User 
 from django.contrib.auth import login,logout,authenticate
 from django.http import HttpResponseRedirect 
 from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator,EmptyPage,InvalidPage
+#import simplejson
+import django
+from django.contrib.auth.decorators import login_required
+from vioturismo.settings import URL_LOGIN
 
 def index_view(request):
     return render_to_response('sitios/index.html',context_instance=RequestContext(request))
+
+
+def about_view(request):
+    version = django.get_version()
+    mensaje = "Esto es un mensaje desde mi vista"
+    ctx = {'msg':mensaje,'version':version}
+    return render_to_response('sitios/about.html',ctx,context_instance=RequestContext(request))
+
+
+
 
 def productos_view(request,pagina):
     lista_prod = producto.objects.filter(status=True)
@@ -29,7 +44,8 @@ def productos_view(request,pagina):
 
 def singleProduct_view(request,id_prod):
     prod = producto.objects.get(id=id_prod)
-    ctx = {'producto':prod}
+    cats = prod.rutas.all()
+    ctx = {'producto':prod,'rutas':cats}
     return render_to_response('sitios/SingleProducto.html',ctx,context_instance=RequestContext(request))
 
 
@@ -56,6 +72,26 @@ def singleServic_view(request,id_serv):
     return render_to_response('sitios/SingleServicio.html',ctx,context_instance=RequestContext(request))
 
 
+
+def experiencias_view(request,pagina):
+    lista_expe = experiencia.objects.filter(status=True)
+    paginator = Paginator(lista_expe,5)
+    try:
+        page = int(pagina)
+    except:
+        page = 1
+    try:
+        experiencias = paginator.page(page)
+    except (EmptyPage,InvalidPage):
+        experiencias = paginator.page(paginator.num_pages)
+    ctx = {'experiencias':experiencias}
+    return render_to_response('sitios/experiencias.html',ctx,context_instance=RequestContext(request))
+
+
+def singleExperinc_view(request,id_expe):
+    expe = experiencia.objects.get(id=id_expe)
+    ctx = {'experiencia':expe}
+    return render_to_response('sitios/SingleExperiencia.html',ctx,context_instance=RequestContext(request))
 
 
 def contacto_view(request):

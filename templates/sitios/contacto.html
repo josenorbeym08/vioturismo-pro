@@ -3,17 +3,18 @@
 {% block content %}
 <br>
 {% if info_enviado %}
-		Gracias por enviar comentario, nos pondremos en contacto contigo.
-		<br>
-		La informacion recibida fue la siguiente<br>
-		<p>Email utilizado: {{email}}</p>
-		<p> Titulo: {{titulo}}</p>
-		<p> Texto Citado: </p><br><br> <h3>{{texto}}</h3>
+	Gracias por enviar comentario, nos pondremos en contacto contigo.
+	<br>
+	La informacion recibida fue la siguiente<br>
+	<p>Email utilizado: {{email}}</p>
+	<p> Titulo: {{titulo}}</p>
+	<p> Texto Citado: </p><br><br> <h3>{{texto}}</h3>
 {% else %}
-		<form action="." method="POST">
-				{% csrf_token %}
-				{{form.as_p}}
-		<button class="btn btn-primary" type="submit"> Enviar Comentario  </button>
-		</form>
+	<form action="." method="POST">
+		<head><h3  style="text-align:center"> Vista Contactenos</h3>
+		{% csrf_token %}
+		{{form.as_p}}
+	<button class="btn btn-primary" type="submit"> Enviar Comentario  </button>
+	</form>
 {% endif %}
 {% endblock %}

@@ -1,34 +1,89 @@
 {% extends 'base.html' %}
-{% block title %} lista de servicios {% endblock %}
+{% block title %} Lista de Servicios {% endblock %}
 {% block content %}
-<h1> catalogo de servicios:</h1>
-<br>
+
+
+<!--IniciaModal-->
+ <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <h3 id="myModalLabel">Eliminar Servicios</h3>
+    </div>
+    <div class="modal-body">
+    <p>¿Realmente desea eliminar el servicio <span id="modal_name"></span>?</p>
+    </div>
+    <div class="modal-footer">
+        <form method="post" id="frmEliminar">
+            {% csrf_token %}
+            <input type="hidden" id="modal_idServicio" name="servic_id">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+<!--EndModal-->
+
+
+
+<h3>Catalogo de Servicios:</h3>
 {% if user.is_authenticated %}
-<a href="{% url 'vista_agregar_servicio' %}" class="btn"><i class="icon-plus">Nuevo</i></a><br>
+<a href="{% url 'vista_agregar_servicio' %}" class="btn"><i class="icon-plus"></i> Nuevo</a><br>
 {% endif %}
 <br>
 {% if servicios %}
-	{% for s in servicios %}
-		<p><a href="/servicio/{{s.id}}/">{{s.nombre}}</a></p>
+    <table class="table table-hover" id="tabla_servicios">
+    	<thead>
+                <tr>
+                  <th>Servicio</th>
+                  <th>Descripcion</th>
+                  <th>Contacto</th>
+                  <th>Telefono</th>
+                  <th>Contacto2</th>
+                  <th>Telefono2</th>
+                  <th>Precio</th>
+                </tr>
+        </thead>
+    {% for s in servicios %}
+     	<tbody>
+     		<tr id="tr{{s.id}}">
+				<td>{{ s.nombre }}</td>
+				<td>{{ s.descripcion }}</td>
+				<td>{{ s.contacto }}</td>
+				<td>{{ s.telefono }}</td>
+				<td>{{ s.contacto2 }}</td>
+				<td>{{ s.telefono2 }}</td>
+				<td>{{ s.precio }}</td>
+				<td><a class="btn" href="/servicio/{{s.id}}/"><i class="icon-search"></i>   Ver</a></td>
+<!--				<td><a class="btn" href="#"><i class="icon-shopping-cart"></i> Comprar</a></td>-->
+				{% if user.is_authenticated and user.is_staff %}
+					<td><a class="btn" href="/edit/servicio/{{s.id}}/"><i class="icon-pencil"></i>  Editar </a></td>
+					<td><a href="#myModal" role="button" class="btn btn-danger delete" data-toggle="modal" id="{{s.id}}" data-name="{{s.nombre}}"><i class="icon-trash icon-white"></i>Eliminar</a></td>
+				{% endif %}				
+			</tr>
+		</tbody>
 	{% endfor %}
+    </table>
+	
 {% else %}
-	<h2>NO existen servicios activos a la vista :( </h2>
+	<h2>No existen Servicios activos a la vista :( </h2>
 {% endif %}
-<br><br><br>
+<br>
 {% if servicios %}
-		<a href="/servicios/page/1"> << </a>
+    <div class="pagination">
+    <ul>
+		<li><a href="/servicios/page/1"> << </a></li>
 	{% if servicios.has_previous %}
-		<a href="/servicios/page/{{servicios.previous_page_number }}/"> Prev </a>
+		<li><a href="/servicios/page/{{servicios.previous_page_number }}/"> Prev </a></li>
 	{% else %}
-		<a href="#"> Prev</a>
+		<li><a href="#"> Prev </a></li>
 	{% endif %}
 	{% if servicios.has_next %}
-		<a href="/servicios/page/{{servicios.next_page_number }}/"> Next </a>
+		<li><a href="/servicios/page/{{servicios.next_page_number }}/"> Next </a></li>
 	{% else %}
-		<a href="#"> Next </a>
+		<li><a href="#"> Next </a></li>
 	{% endif %}
-		<a href="/servicios/page/{{servicios.paginator.num_pages }}"> >> </a>
-<br><br><br>
-	<h4> Pagina {{ servicios.number }} de {{ servicios.paginator.num_pages }}</h4>
+		<li><a href="/servicios/page/{{servicios.paginator.num_pages }} "> >> </a><li>
+	</ul>
+	</div>
+	<h4> Página {{ servicios.number }} de {{ servicios.paginator.num_pages }}</h4>
 {% endif %}
-{% endblock %}  
+{% endblock %}

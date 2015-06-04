@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %} Experiencia {{experiencia.nombre}} {% endblock %}
+{% block content %}
+<h1> Experiencias </h1>
+<h1> {{ experiencia.nombre }}</h1><br>
+<img src="/media/{{ experiencia.imagen }}" width="100%" heigth="100%"/>
+<h2><p> {{ experiencia.descripcion }}</p></h2>
+<br><br>
+<a href="javascript:window.history.go(-1);" class="btn btn-primary"> Regresar a la lista </a>
+{% endblock %}

@@ -3,11 +3,13 @@
 {% block title %} login {% endblock %}
 {% block content %}
 <form action="." method="POST" >
+	<head><h3  style="text-align:center"> Vista Login</h3>
     {% csrf_token %}
     {{ mensaje}}
     {{ form.as_p }}
     <button class ="btn btn-primary"> Acceder</button>
-    <h5>Registrarte <a href="/registro/"> aqui</a></h5>
+    <h5>Registrate <a href="/registro/"> aqui</a></h5>
+    <h5>Recuperar contraseña <a href="/user/password/reset/"> aqui</a></h5>
 <!--    <input type="submit" value="login"> !-->
 </form>
 {% endblock %}
