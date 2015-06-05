@@ -161,9 +161,7 @@ EMAIL_USE_TLS = True
 
 URL_LOGIN = '/login/'
 
-STATICFILES_DIRS = (
-    BASE_DIR + '/static',
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 TEMPLATE_DIRS = (
     BASE_DIR + '/templates/',
