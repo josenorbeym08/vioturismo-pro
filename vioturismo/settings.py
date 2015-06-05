@@ -95,10 +95,10 @@ USE_TZ = True
 
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #MEDIA_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__),'media/'))
 
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
