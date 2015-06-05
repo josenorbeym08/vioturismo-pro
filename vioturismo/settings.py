@@ -161,11 +161,6 @@ EMAIL_USE_TLS = True
 
 URL_LOGIN = '/login/'
 
-
-
-#Para cuando corra collestatic
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 STATICFILES_DIRS = (
     BASE_DIR + '/static',
 )
@@ -174,7 +169,7 @@ TEMPLATE_DIRS = (
     BASE_DIR + '/templates/',
 )
 
-#Parse database configuration from $DATABASE_URL
+# Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
@@ -185,5 +180,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
