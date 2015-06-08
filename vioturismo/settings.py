@@ -21,12 +21,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',
+#   'django_extensions',
     'vioturismo.apps.sitios',
     'vioturismo.apps.sturist',
     'vioturismo.apps.webServices.wsSitiostcs',
-    'django.contrib.admindocs',
-#    'vioturismo.apps.webServices.wsProductos',
+#    'django.contrib.admindocs',
 
 )
 
@@ -49,6 +48,17 @@ AUTH_PROFILE_MODULE = 'sitios.userProfile'
 WSGI_APPLICATION = 'vioturismo.wsgi.application'
 
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+
+
+
+
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
@@ -57,16 +67,16 @@ WSGI_APPLICATION = 'vioturismo.wsgi.application'
 
 
 #if MOTOR_DB == 'mysql':
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vio',
-        'USER': 'root',                      # Nol at used with sqlite3.
-        'PASSWORD': 'root',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',  
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'vio',
+#        'USER': 'root',                      # Nol at used with sqlite3.
+#        'PASSWORD': 'root',                  # Not used with sqlite3.
+#        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+#        'PORT': '',  
+#    }
+#}
 #if MOTOR_DB == 'sqlite':
 #    DATABASES = {
 #       'default': {
@@ -108,14 +118,23 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS =(
-    os.path.join(BASE_DIR+'/static/'),
+    BASE_DIR + '/static',
+    #os.path.join(BASE_DIR+'/static/'),
 
 )
+
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR+'/templates/'),
-
+    BASE_DIR + '/templates/',
 )
+
+
+
+#TEMPLATE_DIRS = (
+#    BASE_DIR + '/templates',
+#    os.path.join(BASE_DIR+'/templates/'),
+
+#)
 
 
 #import dj_database_url
@@ -153,19 +172,16 @@ LOGIN_REDIRECT_URL = '/'
 # AQUI VA LA CONFIGURACION DEL SERVIDOR DE CORREO
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_PORT = 465 
 EMAIL_HOST_USER = 'vioturismopro@gmail.com'
 EMAIL_HOST_PASSWORD = 'Jn123456'
 EMAIL_USE_TLS = True
-
+#587
 
 URL_LOGIN = '/login/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-TEMPLATE_DIRS = (
-    BASE_DIR + '/templates/',
-)
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
@@ -178,11 +194,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+#import os
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
